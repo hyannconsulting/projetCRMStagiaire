@@ -1,0 +1,43 @@
+﻿@model projetCRMStagiaire.ViewModels.InscriptionViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Ajouter une inscription</h2>
+
+<br />
+
+@using (Html.BeginForm("Create", "Gigs"))
+{
+
+    @Html.AntiForgeryToken()
+
+    @*<div class="form-group">
+            @Html.LabelFor(m => m.Date)
+            @Html.TextBoxFor(m => m.Date, new { @class = "form-control", placeholder = "eg 1 Jan 2015" })
+            @Html.ValidationMessageFor(m => m.Date)
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdActiviteSportive)
+        @Html.DropDownListFor(m => m.IdActiviteSportive, new SelectList(Model.ActiviteSportives, "Id", "Nom"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.IdActiviteSportive)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdUser)
+        @Html.DropDownListFor(m => m.IdUser, new SelectList(Model.Stagiaires, "Id", "Nom"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.IdUser)
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

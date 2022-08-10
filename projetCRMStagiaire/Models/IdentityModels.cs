@@ -17,6 +17,8 @@ namespace projetCRMStagiaire.Models
         }
 
         public string Section { get; set; }
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
 
     }
 }
