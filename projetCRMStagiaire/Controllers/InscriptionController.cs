@@ -14,7 +14,7 @@ namespace projetCRMStagiaire.Controllers
             _dbContext = new ApplicationDbContext();
         }
 
-        // GET: Inscription
+        [Authorize]
         public ActionResult Create()
         {
             var viewModel = new InscriptionViewModel
