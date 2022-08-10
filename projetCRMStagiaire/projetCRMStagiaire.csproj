@@ -177,9 +177,20 @@
     <Compile Include="Migrations\202208101723393_initialModel.Designer.cs">
       <DependentUpon>202208101723393_initialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208101817051_addtables.cs" />
+    <Compile Include="Migrations\202208101817051_addtables.Designer.cs">
+      <DependentUpon>202208101817051_addtables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208101825030_setConventions.cs" />
+    <Compile Include="Migrations\202208101825030_setConventions.Designer.cs">
+      <DependentUpon>202208101825030_setConventions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActiviteSportive.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Inscription.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -260,6 +271,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202208101723393_initialModel.resx">
       <DependentUpon>202208101723393_initialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208101817051_addtables.resx">
+      <DependentUpon>202208101817051_addtables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208101825030_setConventions.resx">
+      <DependentUpon>202208101825030_setConventions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
