@@ -185,6 +185,10 @@
     <Compile Include="Migrations\202208101825030_setConventions.Designer.cs">
       <DependentUpon>202208101825030_setConventions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208101832147_populateActiviteSportive.cs" />
+    <Compile Include="Migrations\202208101832147_populateActiviteSportive.Designer.cs">
+      <DependentUpon>202208101832147_populateActiviteSportive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiviteSportive.cs" />
@@ -277,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208101825030_setConventions.resx">
       <DependentUpon>202208101825030_setConventions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208101832147_populateActiviteSportive.resx">
+      <DependentUpon>202208101832147_populateActiviteSportive.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
