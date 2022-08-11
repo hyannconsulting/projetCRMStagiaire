@@ -18,7 +18,7 @@ namespace projetCRMStagiaire.ViewModels
         public IEnumerable<ActiviteSportive> ActiviteSportives { get; set; }
 
         [Display(Name = "Stagiaire")]
-        public int IdUser { get; set; }
+        public string IdUser { get; set; }
         public IEnumerable<ApplicationUser> Stagiaires { get; set; }
         public DateTime DateInscription { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using projetCRMStagiaire.Models;
+﻿using Microsoft.AspNet.Identity;
+using projetCRMStagiaire.Models;
 using projetCRMStagiaire.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
@@ -26,6 +27,27 @@ namespace projetCRMStagiaire.Controllers
 
 
             return View(viewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Create(InscriptionViewModel viewModel)
+        {
+            var userid = User.Identity.GetUserId();
+            var user = _dbContext.Users.SingleOrDefault(a => a.Id == userid);
+            var inscpt = new Inscription
+            {
+                IdActiviteSportive = viewModel.IdActiviteSportive,
+                DateInscription = System.DateTime.Now,
+                Stagiaire = user,
+            };
+
+            _dbContext.Inscriptions.Add(inscpt);
+            _dbContext.SaveChanges();
+
+
+            return RedirectToAction("index", "home");
+
         }
     }
 }
