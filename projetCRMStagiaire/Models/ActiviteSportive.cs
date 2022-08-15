@@ -13,5 +13,6 @@ namespace projetCRMStagiaire.Models
         [StringLength(225)]
         public string Description { get; set; }
 
+
     }
 }

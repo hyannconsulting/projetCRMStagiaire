@@ -39,7 +39,9 @@ namespace projetCRMStagiaire.Controllers
             {
                 IdActiviteSportive = viewModel.IdActiviteSportive,
                 DateInscription = System.DateTime.Now,
-                Stagiaire = user,
+                //  Stagiaire = user,
+                StagiaireId = userid,
+
             };
 
             _dbContext.Inscriptions.Add(inscpt);

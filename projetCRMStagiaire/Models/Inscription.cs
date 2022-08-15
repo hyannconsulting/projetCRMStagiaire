@@ -15,5 +15,9 @@ namespace projetCRMStagiaire.Models
         public ApplicationUser Stagiaire { get; set; }
         public DateTime DateInscription { get; set; }
 
+
+        [Required]
+        public string StagiaireId { get; set; }
+
     }
 }

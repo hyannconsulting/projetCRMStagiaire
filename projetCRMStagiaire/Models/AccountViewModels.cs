@@ -82,6 +82,8 @@ namespace projetCRMStagiaire.Models
         [Required]
         public string Prenom { get; set; }
 
+        public string Section { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
         [DataType(DataType.Password)]

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32630.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "projetCRMStagiaire", "projetCRMStagiaire\projetCRMStagiaire.csproj", "{0EA6D1CB-49CF-456F-9ADA-9058E3D67F24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetCRMStagiaire.Core", "ProjetCRMStagiaire.Core\ProjetCRMStagiaire.Core.csproj", "{A14BC22F-E87C-4EF9-AAEC-A026138F0247}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0EA6D1CB-49CF-456F-9ADA-9058E3D67F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EA6D1CB-49CF-456F-9ADA-9058E3D67F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EA6D1CB-49CF-456F-9ADA-9058E3D67F24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14BC22F-E87C-4EF9-AAEC-A026138F0247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14BC22F-E87C-4EF9-AAEC-A026138F0247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14BC22F-E87C-4EF9-AAEC-A026138F0247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14BC22F-E87C-4EF9-AAEC-A026138F0247}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

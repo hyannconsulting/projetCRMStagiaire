@@ -22,5 +22,13 @@ namespace projetCRMStagiaire.ViewModels
         public IEnumerable<ApplicationUser> Stagiaires { get; set; }
         public DateTime DateInscription { get; set; }
 
+
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
+
+        public string Section { get; set; }
+        public string Email { get; set; }
+
+
     }
 }
