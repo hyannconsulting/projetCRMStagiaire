@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetCRMStagiaire.Core.Data;
 
@@ -11,9 +12,10 @@ using ProjetCRMStagiaire.Core.Data;
 namespace ProjetCRMStagiaire.Core.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220815112141_initdb")]
+    partial class initdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,11 +280,9 @@ namespace ProjetCRMStagiaire.Core.Data.Migrations
 
                     b.Property<string>("StagiaireId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StagiaireId");
 
                     b.ToTable("Inscriptions");
                 });
@@ -336,17 +336,6 @@ namespace ProjetCRMStagiaire.Core.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Inscription", b =>
-                {
-                    b.HasOne("ProjetCRMStagiaire.Core.Data.ApplicationUser", "Stagiaire")
-                        .WithMany()
-                        .HasForeignKey("StagiaireId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Stagiaire");
                 });
 #pragma warning restore 612, 618
         }

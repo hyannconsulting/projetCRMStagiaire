@@ -11,7 +11,7 @@ namespace ProjetCRMStagiaire.Core.Data
         public int IdActiviteSportive { get; set; }
 
         [Required]
-     //   public ApplicationUser Stagiaire { get; set; }
+        public ApplicationUser Stagiaire { get; set; }
         public DateTime DateInscription { get; set; }
 
 
