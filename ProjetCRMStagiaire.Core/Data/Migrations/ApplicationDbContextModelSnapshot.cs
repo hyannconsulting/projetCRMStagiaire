@@ -182,7 +182,7 @@ namespace ProjetCRMStagiaire.Core.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActiviteSportives");
+                    b.ToTable("ActiviteSportives", (string)null);
                 });
 
             modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.ApplicationUser", b =>
@@ -284,7 +284,7 @@ namespace ProjetCRMStagiaire.Core.Data.Migrations
 
                     b.HasIndex("StagiaireId");
 
-                    b.ToTable("Inscriptions");
+                    b.ToTable("Inscriptions", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -10,6 +10,15 @@ namespace ProjetCRMStagiaire.Core.Data
         {
         }
 
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            //builder.Entity<ApplicationUser>().
+            //    Property(e => e.Nom).IsRequired();   
+        }
+
         public DbSet<Inscription> Inscriptions { get; set; }
         public DbSet<ActiviteSportive> ActiviteSportives { get; set; }
     }
