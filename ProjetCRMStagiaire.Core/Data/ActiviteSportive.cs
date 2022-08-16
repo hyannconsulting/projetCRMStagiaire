@@ -13,6 +13,7 @@ namespace ProjetCRMStagiaire.Core.Data
         [StringLength(225)]
         public string Description { get; set; }
 
+        [Display(Name = "Nb de place")]
         public int NombreDePlace { get; set; }
     }
 }
