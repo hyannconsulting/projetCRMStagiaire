@@ -21,7 +21,8 @@ namespace ProjetCRMStagiaire.Core.Controllers
         // GET: Evenements
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Evenements.Include(e => e.ActiviteSportives);
+            var applicationDbContext = _context.Evenements
+                .Include(e => e.ActiviteSportives);
             return View(await applicationDbContext.ToListAsync());
         }
 
