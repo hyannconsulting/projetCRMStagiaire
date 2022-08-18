@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetCRMStagiaire.Core.Data;
 
@@ -11,9 +12,10 @@ using ProjetCRMStagiaire.Core.Data;
 namespace ProjetCRMStagiaire.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220818222036_ActiviteSportive_inscription")]
+    partial class ActiviteSportive_inscription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,28 +268,6 @@ namespace ProjetCRMStagiaire.Core.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Evenements", b =>
-                {
-                    b.Property<int>("EvenementId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EvenementId"), 1L, 1);
-
-                    b.Property<int>("ActiviteSportiveId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DateEvenement")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("EvenementId");
-
-                    b.HasIndex("ActiviteSportiveId");
-
-                    b.ToTable("Evenements");
-                });
-
             modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Inscription", b =>
                 {
                     b.Property<int>("InscriptionId")
@@ -367,17 +347,6 @@ namespace ProjetCRMStagiaire.Core.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Evenements", b =>
-                {
-                    b.HasOne("ProjetCRMStagiaire.Core.Data.ActiviteSportive", "ActiviteSportives")
-                        .WithMany()
-                        .HasForeignKey("ActiviteSportiveId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ActiviteSportives");
                 });
 
             modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Inscription", b =>

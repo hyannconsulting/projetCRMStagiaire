@@ -20,6 +20,9 @@ namespace ProjetCRMStagiaire.Core.Data
         }
 
         public DbSet<Inscription> Inscriptions { get; set; }
+
+        public DbSet<Evenements> Evenements { get; set; }
+
         public DbSet<ActiviteSportive> ActiviteSportives { get; set; }
     }
 }

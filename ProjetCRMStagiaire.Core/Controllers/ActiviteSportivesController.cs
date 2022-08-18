@@ -35,7 +35,7 @@ namespace ProjetCRMStagiaire.Core.Controllers
             }
 
             var activiteSportive = await _context.ActiviteSportives
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ActiviteSportiveId == id);
             if (activiteSportive == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace ProjetCRMStagiaire.Core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Description,NombreDePlace")] ActiviteSportive activiteSportive)
+        public async Task<IActionResult> Create([Bind("ActiviteSportiveId,Nom,Description,NombreDePlace,Lieu")] ActiviteSportive activiteSportive)
         {
             if (ModelState.IsValid)
             {
@@ -87,9 +87,9 @@ namespace ProjetCRMStagiaire.Core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Description,NombreDePlace")] ActiviteSportive activiteSportive)
+        public async Task<IActionResult> Edit(int id, [Bind("ActiviteSportiveId,Nom,Description,NombreDePlace,Lieu")] ActiviteSportive activiteSportive)
         {
-            if (id != activiteSportive.Id)
+            if (id != activiteSportive.ActiviteSportiveId)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace ProjetCRMStagiaire.Core.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ActiviteSportiveExists(activiteSportive.Id))
+                    if (!ActiviteSportiveExists(activiteSportive.ActiviteSportiveId))
                     {
                         return NotFound();
                     }
@@ -126,7 +126,7 @@ namespace ProjetCRMStagiaire.Core.Controllers
             }
 
             var activiteSportive = await _context.ActiviteSportives
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ActiviteSportiveId == id);
             if (activiteSportive == null)
             {
                 return NotFound();
@@ -156,7 +156,7 @@ namespace ProjetCRMStagiaire.Core.Controllers
 
         private bool ActiviteSportiveExists(int id)
         {
-          return (_context.ActiviteSportives?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.ActiviteSportives?.Any(e => e.ActiviteSportiveId == id)).GetValueOrDefault();
         }
     }
 }

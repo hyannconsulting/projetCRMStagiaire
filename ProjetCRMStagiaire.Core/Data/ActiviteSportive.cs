@@ -4,7 +4,7 @@ namespace ProjetCRMStagiaire.Core.Data
 {
     public class ActiviteSportive
     {
-        public int Id { get; set; }
+        public int ActiviteSportiveId { get; set; }
 
         [Required]
         [StringLength(128)]
@@ -15,5 +15,7 @@ namespace ProjetCRMStagiaire.Core.Data
 
         [Display(Name = "Nb de place")]
         public int NombreDePlace { get; set; }
+
+        public string Lieu { get; set; }
     }
 }

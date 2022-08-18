@@ -9,90 +9,90 @@ using ProjetCRMStagiaire.Core.Data;
 
 namespace ProjetCRMStagiaire.Core.Controllers
 {
-    public class InscriptionsController : Controller
+    public class EvenementsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public InscriptionsController(ApplicationDbContext context)
+        public EvenementsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Inscriptions
+        // GET: Evenements
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Inscriptions.Include(i => i.Stagiaire);
+            var applicationDbContext = _context.Evenements.Include(e => e.ActiviteSportives);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Inscriptions/Details/5
+        // GET: Evenements/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Inscriptions == null)
+            if (id == null || _context.Evenements == null)
             {
                 return NotFound();
             }
 
-            var inscription = await _context.Inscriptions
-                .Include(i => i.Stagiaire)
-                .FirstOrDefaultAsync(m => m.InscriptionId == id);
-            if (inscription == null)
+            var evenements = await _context.Evenements
+                .Include(e => e.ActiviteSportives)
+                .FirstOrDefaultAsync(m => m.EvenementId == id);
+            if (evenements == null)
             {
                 return NotFound();
             }
 
-            return View(inscription);
+            return View(evenements);
         }
 
-        // GET: Inscriptions/Create
+        // GET: Evenements/Create
         public IActionResult Create()
         {
-            ViewData["StagiaireId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["ActiviteSportiveId"] = new SelectList(_context.ActiviteSportives, "ActiviteSportiveId", "Nom");
             return View();
         }
 
-        // POST: Inscriptions/Create
+        // POST: Evenements/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("InscriptionId,IdActiviteSportive,StagiaireId,DateInscription")] Inscription inscription)
+        public async Task<IActionResult> Create([Bind("EvenementId,ActiviteSportiveId,DateEvenement")] Evenements evenements)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(inscription);
+                _context.Add(evenements);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StagiaireId"] = new SelectList(_context.Users, "Id", "Id", inscription.StagiaireId);
-            return View(inscription);
+            ViewData["ActiviteSportiveId"] = new SelectList(_context.ActiviteSportives, "ActiviteSportiveId", "Nom", evenements.ActiviteSportiveId);
+            return View(evenements);
         }
 
-        // GET: Inscriptions/Edit/5
+        // GET: Evenements/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Inscriptions == null)
+            if (id == null || _context.Evenements == null)
             {
                 return NotFound();
             }
 
-            var inscription = await _context.Inscriptions.FindAsync(id);
-            if (inscription == null)
+            var evenements = await _context.Evenements.FindAsync(id);
+            if (evenements == null)
             {
                 return NotFound();
             }
-            ViewData["StagiaireId"] = new SelectList(_context.Users, "Id", "Id", inscription.StagiaireId);
-            return View(inscription);
+            ViewData["ActiviteSportiveId"] = new SelectList(_context.ActiviteSportives, "ActiviteSportiveId", "Nom", evenements.ActiviteSportiveId);
+            return View(evenements);
         }
 
-        // POST: Inscriptions/Edit/5
+        // POST: Evenements/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("InscriptionId,IdActiviteSportive,StagiaireId,DateInscription")] Inscription inscription)
+        public async Task<IActionResult> Edit(int id, [Bind("EvenementId,ActiviteSportiveId,DateEvenement")] Evenements evenements)
         {
-            if (id != inscription.InscriptionId)
+            if (id != evenements.EvenementId)
             {
                 return NotFound();
             }
@@ -101,12 +101,12 @@ namespace ProjetCRMStagiaire.Core.Controllers
             {
                 try
                 {
-                    _context.Update(inscription);
+                    _context.Update(evenements);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!InscriptionExists(inscription.InscriptionId))
+                    if (!EvenementsExists(evenements.EvenementId))
                     {
                         return NotFound();
                     }
@@ -117,51 +117,51 @@ namespace ProjetCRMStagiaire.Core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StagiaireId"] = new SelectList(_context.Users, "Id", "Id", inscription.StagiaireId);
-            return View(inscription);
+            ViewData["ActiviteSportiveId"] = new SelectList(_context.ActiviteSportives, "ActiviteSportiveId", "Nom", evenements.ActiviteSportiveId);
+            return View(evenements);
         }
 
-        // GET: Inscriptions/Delete/5
+        // GET: Evenements/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Inscriptions == null)
+            if (id == null || _context.Evenements == null)
             {
                 return NotFound();
             }
 
-            var inscription = await _context.Inscriptions
-                .Include(i => i.Stagiaire)
-                .FirstOrDefaultAsync(m => m.InscriptionId == id);
-            if (inscription == null)
+            var evenements = await _context.Evenements
+                .Include(e => e.ActiviteSportives)
+                .FirstOrDefaultAsync(m => m.EvenementId == id);
+            if (evenements == null)
             {
                 return NotFound();
             }
 
-            return View(inscription);
+            return View(evenements);
         }
 
-        // POST: Inscriptions/Delete/5
+        // POST: Evenements/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Inscriptions == null)
+            if (_context.Evenements == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Inscriptions'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Evenements'  is null.");
             }
-            var inscription = await _context.Inscriptions.FindAsync(id);
-            if (inscription != null)
+            var evenements = await _context.Evenements.FindAsync(id);
+            if (evenements != null)
             {
-                _context.Inscriptions.Remove(inscription);
+                _context.Evenements.Remove(evenements);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool InscriptionExists(int id)
+        private bool EvenementsExists(int id)
         {
-          return (_context.Inscriptions?.Any(e => e.InscriptionId == id)).GetValueOrDefault();
+          return (_context.Evenements?.Any(e => e.EvenementId == id)).GetValueOrDefault();
         }
     }
 }

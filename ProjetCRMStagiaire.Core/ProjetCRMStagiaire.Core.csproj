@@ -8,12 +8,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\ActiviteSportives\**" />
+    <Compile Remove="Views\Inscriptions\**" />
+    <Content Remove="Views\ActiviteSportives\**" />
+    <Content Remove="Views\Inscriptions\**" />
+    <EmbeddedResource Remove="Views\ActiviteSportives\**" />
+    <EmbeddedResource Remove="Views\Inscriptions\**" />
+    <None Remove="Views\ActiviteSportives\**" />
+    <None Remove="Views\Inscriptions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\ActiviteSportives\Create.cshtml" />
+    <None Include="Views\ActiviteSportives\Delete.cshtml" />
+    <None Include="Views\ActiviteSportives\Details.cshtml" />
+    <None Include="Views\ActiviteSportives\Edit.cshtml" />
+    <None Include="Views\ActiviteSportives\Index.cshtml" />
+    <None Include="Views\Inscriptions\Create.cshtml" />
+    <None Include="Views\Inscriptions\Delete.cshtml" />
+    <None Include="Views\Inscriptions\Details.cshtml" />
+    <None Include="Views\Inscriptions\Edit.cshtml" />
+    <None Include="Views\Inscriptions\Index.cshtml" />
   </ItemGroup>
 
 </Project>
