@@ -142,7 +142,7 @@ namespace ProjetCRMStagiaire.Core.Controllers
         {
             if (_context.ActiviteSportives == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.ActiviteSportives'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.ActiviteSportives' is null.");
             }
             var activiteSportive = await _context.ActiviteSportives.FindAsync(id);
             if (activiteSportive != null)
