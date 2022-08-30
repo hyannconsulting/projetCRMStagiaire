@@ -9,11 +9,11 @@ using ProjetCRMStagiaire.Core.Data;
 
 #nullable disable
 
-namespace ProjetCRMStagiaire.Core.Data.Migrations
+namespace ProjetCRMStagiaire.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220815113430_updateinscription")]
-    partial class updateinscription
+    [Migration("20220822191955_initdb")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -163,16 +163,20 @@ namespace ProjetCRMStagiaire.Core.Data.Migrations
 
             modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.ActiviteSportive", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ActiviteSportiveId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActiviteSportiveId"), 1L, 1);
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(225)
                         .HasColumnType("nvarchar(225)");
+
+                    b.Property<string>("Lieu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -182,7 +186,7 @@ namespace ProjetCRMStagiaire.Core.Data.Migrations
                     b.Property<int>("NombreDePlace")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ActiviteSportiveId");
 
                     b.ToTable("ActiviteSportives");
                 });
@@ -264,13 +268,38 @@ namespace ProjetCRMStagiaire.Core.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Inscription", b =>
+            modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Evenements", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("EvenementId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EvenementId"), 1L, 1);
+
+                    b.Property<int>("ActiviteSportiveId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DateEvenement")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EvenementId");
+
+                    b.HasIndex("ActiviteSportiveId");
+
+                    b.ToTable("Evenements");
+                });
+
+            modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Inscription", b =>
+                {
+                    b.Property<int>("InscriptionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InscriptionId"), 1L, 1);
+
+                    b.Property<int>("ActiviteSportiveId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateInscription")
                         .HasColumnType("datetime2");
@@ -282,7 +311,9 @@ namespace ProjetCRMStagiaire.Core.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("InscriptionId");
+
+                    b.HasIndex("ActiviteSportiveId");
 
                     b.HasIndex("StagiaireId");
 
@@ -340,13 +371,32 @@ namespace ProjetCRMStagiaire.Core.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Evenements", b =>
+                {
+                    b.HasOne("ProjetCRMStagiaire.Core.Data.ActiviteSportive", "ActiviteSportives")
+                        .WithMany()
+                        .HasForeignKey("ActiviteSportiveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActiviteSportives");
+                });
+
             modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Inscription", b =>
                 {
+                    b.HasOne("ProjetCRMStagiaire.Core.Data.ActiviteSportive", "ActiviteSportive")
+                        .WithMany()
+                        .HasForeignKey("ActiviteSportiveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ProjetCRMStagiaire.Core.Data.ApplicationUser", "Stagiaire")
                         .WithMany()
                         .HasForeignKey("StagiaireId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ActiviteSportive");
 
                     b.Navigation("Stagiaire");
                 });
