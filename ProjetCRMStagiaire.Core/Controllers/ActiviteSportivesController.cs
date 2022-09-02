@@ -158,7 +158,9 @@ namespace ProjetCRMStagiaire.Core.Controllers
 
         private bool ActiviteSportiveExists(int id)
         {
-          return (_context.ActiviteSportives?.Any(e => e.ActiviteSportiveId == id)).GetValueOrDefault();
+          return (_context.ActiviteSportives?
+                .Any(e => e.ActiviteSportiveId == id))
+                .GetValueOrDefault();
         }
     }
 }

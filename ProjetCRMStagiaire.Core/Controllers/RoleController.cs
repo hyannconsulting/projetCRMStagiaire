@@ -20,6 +20,7 @@ namespace ProjetCRMStagiaire.Core.Controllers
         [HttpGet]
         public IActionResult CreateRole() 
         { 
+
             return View(new IdentityRole()); 
         }
 

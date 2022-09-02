@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetCRMStagiaire.Core.Data;
+using ProjetCRMStagiaire.Core.Models;
 
 namespace ProjetCRMStagiaire.Core.Controllers
 {
@@ -47,23 +49,43 @@ namespace ProjetCRMStagiaire.Core.Controllers
             return View(evenements);
         }
 
-        // GET: Evenements/Create
+        /// <summary>
+        /// /GET: Evenements/Create
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             ViewData["ActiviteSportiveId"] = new SelectList(_context.ActiviteSportives, "ActiviteSportiveId", "Nom");
+
             return View();
         }
+
+
 
         // POST: Evenements/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EvenementId,ActiviteSportiveId,DateEvenement")] Evenements evenements)
+        public async Task<IActionResult> Create([Bind("EvenementId,ActiviteSportiveId,DateEvenement")] EvenementViewModel evenements)
         {
+          
             if (ModelState.IsValid)
             {
-                _context.Add(evenements);
+
+              var activite = _context.ActiviteSportives
+                    .SingleOrDefault(a => a.ActiviteSportiveId == evenements.ActiviteSportiveId);
+
+                var newevent = new Evenements
+                {
+                    ActiviteSportiveId = evenements.ActiviteSportiveId,
+                    DateEvenement = evenements.DateEvenement,
+                    EvenementId = evenements.EvenementId,
+                    ActiviteSportives = activite
+
+                };
+                
+                _context.Add(newevent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

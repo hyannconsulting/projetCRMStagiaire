@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetCRMStagiaire.Core.Data;
+using ProjetCRMStagiaire.Core.Models;
 
 namespace ProjetCRMStagiaire.Core.Controllers
 {
@@ -49,9 +50,11 @@ namespace ProjetCRMStagiaire.Core.Controllers
         // GET: Inscriptions/Create
         public IActionResult Create()
         {
+
             ViewData["StagiaireId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
+       
 
         // POST: Inscriptions/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.

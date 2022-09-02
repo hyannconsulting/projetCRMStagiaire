@@ -9,6 +9,21 @@ namespace ProjetCRMStagiaire.Core.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
+            Down(migrationBuilder);
+
+            //migrationBuilder.DropTable(
+            // name: "AspNetRoles");
+
+            //migrationBuilder.DropTable(
+            // name: "Evenements");
+
+            //migrationBuilder.DropTable(
+            //    name: "Inscriptions");
+
+            //migrationBuilder.DropTable(
+            //    name: "ActiviteSportives");
+
             migrationBuilder.CreateTable(
                 name: "ActiviteSportives",
                 columns: table => new
