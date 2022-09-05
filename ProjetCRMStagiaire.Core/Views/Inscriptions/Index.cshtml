@@ -9,6 +9,7 @@
 <p>
     <a asp-action="Create">Nouvelle actvité</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -31,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.IdActiviteSportive)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Stagiaire.Id)
+                @Html.DisplayFor(modelItem => item.Stagiaire.UserName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateInscription)
