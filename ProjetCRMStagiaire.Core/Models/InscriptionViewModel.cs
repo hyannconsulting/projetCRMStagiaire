@@ -1,24 +1,27 @@
-﻿using ProjetCRMStagiaire.Core.Data;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ProjetCRMStagiaire.Core.Models
 {
     public class InscriptionViewModel
     {
-       
-        public int EvenementId { get; set; }
+
+        public int InscriptionId { get; set; }
 
         [Required]
+        [Display(Name = "Activité sportive")]
         public int ActiviteSportiveId { get; set; }
 
 
 
-
         [Required]
-        public DateTime DateEvenement { get; set; }
+        [Display(Name = "Stagiaire")]
+        public string StagiaireId { get; set; }
 
 
-        //public ActiviteSportive ActiviteSportives { get; set; }
+        public DateTime DateInscription
+        {
+            get; set;
+        }
 
     }
 }

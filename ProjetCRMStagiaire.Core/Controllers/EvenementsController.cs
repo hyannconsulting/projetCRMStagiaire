@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -69,12 +64,12 @@ namespace ProjetCRMStagiaire.Core.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EvenementId,ActiviteSportiveId,DateEvenement")] EvenementViewModel evenements)
         {
-          
+
             if (ModelState.IsValid)
             {
 
-              var activite = _context.ActiviteSportives
-                    .SingleOrDefault(a => a.ActiviteSportiveId == evenements.ActiviteSportiveId);
+                var activite = _context.ActiviteSportives
+                      .FirstOrDefault(a => a.ActiviteSportiveId == evenements.ActiviteSportiveId);
 
                 var newevent = new Evenements
                 {
@@ -84,7 +79,7 @@ namespace ProjetCRMStagiaire.Core.Controllers
                     ActiviteSportives = activite
 
                 };
-                
+
                 _context.Add(newevent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -179,14 +174,14 @@ namespace ProjetCRMStagiaire.Core.Controllers
             {
                 _context.Evenements.Remove(evenements);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EvenementsExists(int id)
         {
-          return (_context.Evenements?.Any(e => e.EvenementId == id)).GetValueOrDefault();
+            return (_context.Evenements?.Any(e => e.EvenementId == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -51,21 +47,36 @@ namespace ProjetCRMStagiaire.Core.Controllers
         public IActionResult Create()
         {
 
-            ViewData["StagiaireId"] = new SelectList(_context.Users, "Id", "Id");
+
+            ViewData["StagiaireId"] = new SelectList(_context.Users, "Id", "UserName");
+            ViewData["ActiviteSportiveId"] = new SelectList(_context.ActiviteSportives, "ActiviteSportiveId", "Nom");
             return View();
         }
-       
+
 
         // POST: Inscriptions/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("InscriptionId,IdActiviteSportive,StagiaireId,DateInscription")] Inscription inscription)
+        public async Task<IActionResult> Create([Bind("InscriptionId,ActiviteSportiveId,StagiaireId,DateInscription")] InscriptionViewModel inscription)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(inscription);
+
+                var acsportive = _context.ActiviteSportives.FirstOrDefault(a => a.ActiviteSportiveId
+                == inscription.ActiviteSportiveId);
+
+                var inscpt = new Inscription
+                {
+                    IdActiviteSportive = inscription.ActiviteSportiveId,
+                    DateInscription = inscription.DateInscription,
+                    // InscriptionId = inscription.InscriptionId,
+                    StagiaireId = inscription.StagiaireId,
+                    ActiviteSportive = acsportive,
+                };
+
+                _context.Add(inscpt);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -159,14 +170,14 @@ namespace ProjetCRMStagiaire.Core.Controllers
             {
                 _context.Inscriptions.Remove(inscription);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool InscriptionExists(int id)
         {
-          return (_context.Inscriptions?.Any(e => e.InscriptionId == id)).GetValueOrDefault();
+            return (_context.Inscriptions?.Any(e => e.InscriptionId == id)).GetValueOrDefault();
         }
     }
 }

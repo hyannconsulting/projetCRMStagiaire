@@ -1,4 +1,4 @@
-﻿@model ProjetCRMStagiaire.Core.Data.Inscription
+﻿@model ProjetCRMStagiaire.Core.Models.InscriptionViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -15,9 +15,10 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IdActiviteSportive" class="control-label"></label>
-                <input asp-for="IdActiviteSportive" class="form-control" />
-                <span asp-validation-for="IdActiviteSportive" class="text-danger"></span>
+                <label asp-for="ActiviteSportiveId" class="control-label"></label>
+                @*<input asp-for="IdActiviteSportive" class="form-control" />*@
+                <select asp-for="ActiviteSportiveId" class ="form-control" asp-items="ViewBag.ActiviteSportiveId" ></select>
+                <span asp-validation-for="ActiviteSportiveId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StagiaireId" class="control-label"></label>

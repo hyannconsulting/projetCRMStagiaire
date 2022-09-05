@@ -13,6 +13,7 @@ namespace ProjetCRMStagiaire.Core.Data
         public ActiviteSportive ActiviteSportive { get; set; }
 
         [Required]
+        [Display(Name ="Stagiaire")]
         public string StagiaireId { get; set; }
 
 
