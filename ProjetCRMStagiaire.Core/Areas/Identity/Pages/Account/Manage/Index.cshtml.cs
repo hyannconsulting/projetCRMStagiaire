@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjetCRMStagiaire.Core.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account.Manage
 {
@@ -56,9 +53,29 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            /// 
+
+
+            [Required]
+            public string Nom { get; set; }
+
+            [Required]
+            public string Prenom { get; set; }
+
+            public string Section { get; set; }
+
+
+            [Display(Name = "Username")]
+            public string Username { get; set; }
+
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+
+            [Display(Name = "Profile Picture")]
+            public byte[] ProfilePicture { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -66,11 +83,20 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
+            var section = user.Section;
+            var nom = user.Nom;
+            var prenom = user.Prenom;
+            var profilePicture = user.ProfilePicture;
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Nom = nom,
+                Prenom = prenom,
+                ProfilePicture = profilePicture,
+                Section = section,
+                Username = userName
             };
         }
 
@@ -88,6 +114,7 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {

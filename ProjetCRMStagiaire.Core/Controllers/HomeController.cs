@@ -22,6 +22,7 @@ namespace ProjetCRMStagiaire.Core.Controllers
         {
             var applicationDbContext = _context.Inscriptions.
                 Include(i => i.Stagiaire);
+
             return View(applicationDbContext.ToList());
 
             //return View();

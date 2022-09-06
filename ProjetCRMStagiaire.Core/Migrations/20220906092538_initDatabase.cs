@@ -5,25 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetCRMStagiaire.Core.Migrations
 {
-    public partial class initdb : Migration
+    public partial class initDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
-            Down(migrationBuilder);
-
-            //migrationBuilder.DropTable(
-            // name: "AspNetRoles");
-
-            //migrationBuilder.DropTable(
-            // name: "Evenements");
-
-            //migrationBuilder.DropTable(
-            //    name: "Inscriptions");
-
-            //migrationBuilder.DropTable(
-            //    name: "ActiviteSportives");
-
             migrationBuilder.CreateTable(
                 name: "ActiviteSportives",
                 columns: table => new
@@ -89,7 +74,7 @@ namespace ProjetCRMStagiaire.Core.Migrations
                     EvenementId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ActiviteSportiveId = table.Column<int>(type: "int", nullable: false),
-                    DateEvenement = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DateEvenement = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

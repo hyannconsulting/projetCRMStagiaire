@@ -12,8 +12,8 @@ using ProjetCRMStagiaire.Core.Data;
 namespace ProjetCRMStagiaire.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220818221323_Inscription")]
-    partial class Inscription
+    [Migration("20220906092538_initDatabase")]
+    partial class initDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -268,6 +268,27 @@ namespace ProjetCRMStagiaire.Core.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Evenements", b =>
+                {
+                    b.Property<int>("EvenementId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EvenementId"), 1L, 1);
+
+                    b.Property<int>("ActiviteSportiveId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateEvenement")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("EvenementId");
+
+                    b.HasIndex("ActiviteSportiveId");
+
+                    b.ToTable("Evenements");
+                });
+
             modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Inscription", b =>
                 {
                     b.Property<int>("InscriptionId")
@@ -276,14 +297,22 @@ namespace ProjetCRMStagiaire.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InscriptionId"), 1L, 1);
 
+                    b.Property<int>("ActiviteSportiveId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateInscription")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("IdActiviteSportive")
+                        .HasColumnType("int");
 
                     b.Property<string>("StagiaireId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("InscriptionId");
+
+                    b.HasIndex("ActiviteSportiveId");
 
                     b.HasIndex("StagiaireId");
 
@@ -341,13 +370,32 @@ namespace ProjetCRMStagiaire.Core.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Evenements", b =>
+                {
+                    b.HasOne("ProjetCRMStagiaire.Core.Data.ActiviteSportive", "ActiviteSportives")
+                        .WithMany()
+                        .HasForeignKey("ActiviteSportiveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActiviteSportives");
+                });
+
             modelBuilder.Entity("ProjetCRMStagiaire.Core.Data.Inscription", b =>
                 {
+                    b.HasOne("ProjetCRMStagiaire.Core.Data.ActiviteSportive", "ActiviteSportive")
+                        .WithMany()
+                        .HasForeignKey("ActiviteSportiveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ProjetCRMStagiaire.Core.Data.ApplicationUser", "Stagiaire")
                         .WithMany()
                         .HasForeignKey("StagiaireId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ActiviteSportive");
 
                     b.Navigation("Stagiaire");
                 });

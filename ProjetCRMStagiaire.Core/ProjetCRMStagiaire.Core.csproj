@@ -18,6 +18,12 @@
     <Compile Remove="Migrations\20220818222036_ActiviteSportive_inscription.Designer.cs" />
     <Compile Remove="Migrations\20220818222438_addEvenement.cs" />
     <Compile Remove="Migrations\20220818222438_addEvenement.Designer.cs" />
+    <Compile Remove="Migrations\20220822191955_initdb.cs" />
+    <Compile Remove="Migrations\20220822191955_initdb.Designer.cs" />
+    <Compile Remove="Migrations\20220826094131_Roles.cs" />
+    <Compile Remove="Migrations\20220826094131_Roles.Designer.cs" />
+    <Compile Remove="Migrations\20220906091251_initDatabase.cs" />
+    <Compile Remove="Migrations\20220906091251_initDatabase.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,7 +37,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

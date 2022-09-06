@@ -12,8 +12,8 @@ using ProjetCRMStagiaire.Core.Data;
 namespace ProjetCRMStagiaire.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220822191955_initdb")]
-    partial class initdb
+    [Migration("20220906124539_profilepicture")]
+    partial class profilepicture
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -241,6 +241,9 @@ namespace ProjetCRMStagiaire.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("ProfilePicture")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Section")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -279,9 +282,8 @@ namespace ProjetCRMStagiaire.Core.Migrations
                     b.Property<int>("ActiviteSportiveId")
                         .HasColumnType("int");
 
-                    b.Property<string>("DateEvenement")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateEvenement")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("EvenementId");
 
