@@ -2,23 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 using ProjetCRMStagiaire.Core.Data;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
 {
@@ -77,7 +69,7 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
-           // [Display(Name = "Email")]
+            // [Display(Name = "Email")]
             [Display(Name = "Email / Username")]
             public string Email { get; set; }
 
@@ -125,8 +117,8 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-              //  await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-               
+                //  await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -134,9 +126,10 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
+                    await _userManager.AddToRoleAsync(user, Enums.Roles.Basic.ToString());
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                   
+
                     //var callbackUrl = Url.Page(
                     //    "/Account/ConfirmEmail",
                     //    pageHandler: null,
@@ -152,8 +145,8 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
                     //}
                     //else
                     //{
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
                     //}
                 }
                 foreach (var error in result.Errors)
@@ -172,16 +165,16 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
             try
             {
                 // return Activator.CreateInstance<ApplicationUser>();
-                return  new ApplicationUser
+                return new ApplicationUser
                 {
                     UserName = Input.Nom,
                     Email = Input.Email,
                     Nom = Input.Nom,
                     Prenom = Input.Prenom,
                     Section = Input.Section,
-                    
+
                 };
-                
+
             }
             catch
             {
