@@ -7,7 +7,8 @@ using ProjetCRMStagiaire.Core.Models;
 
 namespace ProjetCRMStagiaire.Core.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [Authorize(Roles = "SuperAdmin,Basic")]
     public class EvenementsController : Controller
     {
         private readonly ApplicationDbContext _context;

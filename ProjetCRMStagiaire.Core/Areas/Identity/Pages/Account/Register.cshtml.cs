@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using ProjetCRMStagiaire.Core.Data;
+using ProjetCRMStagiaire.Core.Helpers;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
@@ -116,6 +117,19 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+
+                //if (!EmailHelpers.IsValidEmail(user.Email, "@arfp.asso.fr"))
+                //{
+                //    ModelState.AddModelError("Erreur MAIL", "Erreur sur le mail");
+                //    return Page();
+                //}
+
+                if (!EmailHelpers.IsValidEmailforAsso(user.Email))
+                {
+                    ModelState.AddModelError("Erreur MAIL", "Erreur sur le mail");
+                    return Page();
+                }
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 //  await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
@@ -172,7 +186,6 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
                     Nom = Input.Nom,
                     Prenom = Input.Prenom,
                     Section = Input.Section,
-
                 };
 
             }

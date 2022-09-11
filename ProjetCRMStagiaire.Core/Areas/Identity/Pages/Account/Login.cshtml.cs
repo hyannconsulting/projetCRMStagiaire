@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjetCRMStagiaire.Core.Data;
+using ProjetCRMStagiaire.Core.Helpers;
 using System.ComponentModel.DataAnnotations;
-using System.Net.Mail;
 
 namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
 {
@@ -110,7 +110,7 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
 
-                if (IsValidEmail(Input.Email))
+                if (EmailHelpers.IsValidEmail(Input.Email))
                 {
                     var user = await _userManager.FindByEmailAsync(Input.Email);
                     if (user != null)
@@ -148,18 +148,6 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private bool IsValidEmail(string email)
-        {
-            try
-            {
-                MailAddress m = new MailAddress(email);
 
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
     }
 }
