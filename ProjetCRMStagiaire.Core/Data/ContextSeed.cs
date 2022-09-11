@@ -23,9 +23,10 @@ namespace ProjetCRMStagiaire.Core.Data
                 Email = "superadmin@gmail.com",
                 Nom = "super",
                 Prenom = "admin",
-                EmailConfirmed = true,
-                PhoneNumberConfirmed = true,
-                Section = "Section admin"
+                EmailConfirmed = false,
+                PhoneNumberConfirmed = false,
+                Section = "Section admin",
+
             };
             if (userManager.Users.All(u => u.Id != defaultUser.Id))
             {
@@ -36,6 +37,7 @@ namespace ProjetCRMStagiaire.Core.Data
                     await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Stagiaire.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Admin.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Enums.Roles.SuperAdmin.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Basic.ToString());
                 }
 
             }
