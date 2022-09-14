@@ -39,6 +39,10 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
             _emailSender = emailSender;
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -127,6 +131,8 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
                 if (!EmailHelpers.IsValidEmailforAsso(user.Email))
                 {
                     ModelState.AddModelError("Erreur MAIL", "Erreur sur le mail");
+                    StatusMessage = "Votre mail doit etre de type : mail@arfp.asso.fr";
+
                     return Page();
                 }
 
@@ -140,7 +146,7 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
-                    await _userManager.AddToRoleAsync(user, Enums.Roles.Basic.ToString());
+                    await _userManager.AddToRoleAsync(user, Enums.Roles.Stagiaire.ToString());
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 

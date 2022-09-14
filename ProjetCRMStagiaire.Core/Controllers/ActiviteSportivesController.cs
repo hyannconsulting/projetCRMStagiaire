@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetCRMStagiaire.Core.Data;
 
 namespace ProjetCRMStagiaire.Core.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class ActiviteSportivesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,9 +18,9 @@ namespace ProjetCRMStagiaire.Core.Controllers
         // GET: ActiviteSportives
         public async Task<IActionResult> Index()
         {
-              return _context.ActiviteSportives != null ? 
-                          View(await _context.ActiviteSportives.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.ActiviteSportives'  is null.");
+            return _context.ActiviteSportives != null ?
+                        View(await _context.ActiviteSportives.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.ActiviteSportives'  is null.");
         }
 
         // GET: ActiviteSportives/Details/5
@@ -151,16 +146,16 @@ namespace ProjetCRMStagiaire.Core.Controllers
             {
                 _context.ActiviteSportives.Remove(activiteSportive);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ActiviteSportiveExists(int id)
         {
-          return (_context.ActiviteSportives?
-                .Any(e => e.ActiviteSportiveId == id))
-                .GetValueOrDefault();
+            return (_context.ActiviteSportives?
+                  .Any(e => e.ActiviteSportiveId == id))
+                  .GetValueOrDefault();
         }
     }
 }

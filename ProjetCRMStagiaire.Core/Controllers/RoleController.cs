@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProjetCRMStagiaire.Core.Controllers
 {
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class RoleController : Controller
     {
         private RoleManager<IdentityRole> _roleManager;
@@ -18,10 +20,10 @@ namespace ProjetCRMStagiaire.Core.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateRole() 
-        { 
+        public IActionResult CreateRole()
+        {
 
-            return View(new IdentityRole()); 
+            return View(new IdentityRole());
         }
 
         [HttpPost]

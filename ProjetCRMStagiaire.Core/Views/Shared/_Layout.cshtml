@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using ProjetCRMStagiaire.Core.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,7 +25,7 @@
                          aria-expanded="false" 
                          aria-label="Toggle navigation">
 
-                    <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
@@ -28,7 +34,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
-                         <li class="nav-item">
+
+                        @if (SignInManager.IsSignedIn(User))
+                        { 
+
+                            <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Inscriptions" asp-action="Index">Inscriptions</a>
                         </li>
 
@@ -43,17 +53,17 @@
                         </li>
 
 
-
                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UserRoles" asp-action="Index">User Roles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="RoleManager" asp-action="Index">Role Manager</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="UserRoles" asp-action="Index">Gestion de rôles</a>
                         </li>
 
-                    @*    <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Identity/Account/Manage" asp-controller="RoleManager" asp-action="Index">Role Manager</a>
+                        }
+                      
+                      @*  <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="RoleManager" asp-action="Index">Role Manager</a>
                         </li>*@
+
+                 
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

@@ -8,7 +8,8 @@ using ProjetCRMStagiaire.Core.Models;
 namespace ProjetCRMStagiaire.Core.Controllers
 {
     ////[Authorize]
-    [Authorize(Roles = "SuperAdmin,Basic,Stagiaire,Admin")]
+
+    [Authorize(Roles = "Stagiaire,SuperAdmin")]
     public class InscriptionsController : Controller
     {
         private readonly ApplicationDbContext _context;

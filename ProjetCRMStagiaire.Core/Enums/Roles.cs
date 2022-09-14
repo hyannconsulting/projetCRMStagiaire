@@ -5,6 +5,6 @@
         SuperAdmin,
         Stagiaire,
         Admin,
-        Basic
+        //Basic
     }
 }

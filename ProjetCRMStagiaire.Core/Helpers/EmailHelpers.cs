@@ -40,9 +40,9 @@ namespace ProjetCRMStagiaire.Core.Helpers
             {
                 MailAddress m = new MailAddress(email);
 
-                if (m.Address.Contains(AssoConstante))
+                if (!m.Host.Contains(AssoConstante))
                 {
-                    return true;
+                    return false;
                 }
 
                 return true;
