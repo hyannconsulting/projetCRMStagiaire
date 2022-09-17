@@ -4,7 +4,7 @@ namespace ProjetCRMStagiaire.Core.Helpers
 {
     public static class EmailHelpers
     {
-        public static string AssoConstante { get; set; } = "@arfp.asso.fr";
+        public static string AssoConstante { get; set; } = "arfp.asso.fr";
         public static bool IsValidEmail(string email)
         {
             try
@@ -40,7 +40,7 @@ namespace ProjetCRMStagiaire.Core.Helpers
             {
                 MailAddress m = new MailAddress(email);
 
-                if (!m.Host.Contains(AssoConstante))
+                if (!m.Host.Contains(AssoConstante, StringComparison.InvariantCultureIgnoreCase))
                 {
                     return false;
                 }

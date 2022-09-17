@@ -17,15 +17,18 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ApplicationDbContext _context;
 
         public LoginModel(SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext context
             )
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
+            _context = context;
         }
 
         /// <summary>
@@ -109,10 +112,11 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
             var userName = Input.Email;
             if (ModelState.IsValid)
             {
+                ApplicationUser user = new ApplicationUser();
 
                 if (EmailHelpers.IsValidEmail(Input.Email))
                 {
-                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    user = await _userManager.FindByEmailAsync(Input.Email);
                     if (user != null)
                     {
                         userName = user.UserName;
@@ -122,7 +126,8 @@ namespace ProjetCRMStagiaire.Core.Areas.Identity.Pages.Account
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(userName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
